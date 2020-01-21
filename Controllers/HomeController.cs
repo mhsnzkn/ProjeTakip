@@ -55,17 +55,24 @@ namespace ProjeYonetim.Controllers
             return View();
         }
 
-        public IActionResult Contact()
+        public async Task<IActionResult> Rapor(int id)
         {
-            ViewData["Message"] = "Your contact page.";
+            if (HttpContext.Session.GetInt32("userid") == null)
+            {
+                return RedirectToAction("Login");
+            }
 
-            return View();
+            var reports = await db.Raporlar.Where(a => a.ModulId == id).OrderBy(a => a.Sira).ToListAsync();
+
+            return View(reports);
         }
 
         public IActionResult Privacy()
         {
             return View();
         }
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

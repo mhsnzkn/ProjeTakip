@@ -1,11 +1,12 @@
-﻿@model List<ProjeYonetim.Models.Modul>
+﻿@model List<ProjeYonetim.Models.Rapor>
 @{
-    ViewData["Title"] = "Modüller";
+    ViewData["Title"] = "Raporlar";
 }
 
 <nav aria-label="breadcrumb" style="margin-top:30px">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page">Modüller</li>
+    <li class="breadcrumb-item"><a href="/">Modüller</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Raporlar</li>
   </ol>
 </nav>
 
@@ -16,12 +17,9 @@
 
 @for (int i = 0; i < Model.Count; i++)
 {
-    var cls="col-sm-6";
-    if(Model[i].Sira==0){
-       cls="col-sm-12";
-    }
-    <div class="@cls my-3">
-       <a class="link_index" asp-action="Rapor" asp-route-id="@Model[i].Id">
+    
+    <div class="col-sm-12 my-3">
+       <a class="link_index" href="/files/sample.pdf" target="blank">
       <div class="card" >
       <img class="card-img-top" src="" >
       <div class="card-body">
@@ -34,5 +32,3 @@
   
 </div>
 </div>
- 
-
