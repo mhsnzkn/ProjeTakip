@@ -67,9 +67,11 @@ namespace ProjeYonetim.Controllers
             return View(reports);
         }
 
-        public IActionResult Privacy()
+        public IActionResult Logout()
         {
-            return View();
+            HttpContext.Session.Clear();
+
+            return RedirectToAction("Login");
         }
 
 

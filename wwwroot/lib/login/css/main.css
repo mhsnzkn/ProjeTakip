@@ -10,12 +10,6 @@
   src: url('../fonts/OpenSans/OpenSans-Regular.ttf'); 
 }
 
-@font-face {
-  font-family: OpenSans-Bold;
-  src: url('../fonts/OpenSans/OpenSans-Bold.ttf'); 
-}
-
-
 
 
 /*//////////////////////////////////////////////////////////////////
@@ -51,7 +45,6 @@ a:focus {
 
 a:hover {
 	text-decoration: none;
-  color: #fff;
 }
 
 /*---------------------------------------------*/
@@ -88,31 +81,15 @@ textarea:focus, input:focus {
   border-color: transparent !important;
 }
 
-input:focus::-webkit-input-placeholder { color:transparent; }
-input:focus:-moz-placeholder { color:transparent; }
-input:focus::-moz-placeholder { color:transparent; }
-input:focus:-ms-input-placeholder { color:transparent; }
+input::-webkit-input-placeholder { color: #666666;}
+input:-moz-placeholder { color: #666666;}
+input::-moz-placeholder { color: #666666;}
+input:-ms-input-placeholder { color: #666666;}
 
-textarea:focus::-webkit-input-placeholder { color:transparent; }
-textarea:focus:-moz-placeholder { color:transparent; }
-textarea:focus::-moz-placeholder { color:transparent; }
-textarea:focus:-ms-input-placeholder { color:transparent; }
-
-input::-webkit-input-placeholder { color: #999999;}
-input:-moz-placeholder { color: #999999;}
-input::-moz-placeholder { color: #999999;}
-input:-ms-input-placeholder { color: #999999;}
-
-textarea::-webkit-input-placeholder { color: #999999;}
-textarea:-moz-placeholder { color: #999999;}
-textarea::-moz-placeholder { color: #999999;}
-textarea:-ms-input-placeholder { color: #999999;}
-
-
-label {
-  display: block;
-  margin: 0;
-}
+textarea::-webkit-input-placeholder { color: #666666;}
+textarea:-moz-placeholder { color: #666666;}
+textarea::-moz-placeholder { color: #666666;}
+textarea:-ms-input-placeholder { color: #666666;}
 
 /*---------------------------------------------*/
 button {
@@ -130,21 +107,29 @@ iframe {
 }
 
 /*//////////////////////////////////////////////////////////////////
-[ utility ]*/
-
-/*==================================================================
-[ Text ]*/
+[ Utility ]*/
 .txt1 {
   font-family: OpenSans-Regular;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.4;
-  color: #cccccc;
+  color: #999999;
 }
 
+.txt2 {
+  font-family: OpenSans-Regular;
+  font-size: 15px;
+  line-height: 1.4;
+  color: #4272d7;
+}
+
+.hov1:hover {
+  text-decoration: underline;
+}
 
 
 /*//////////////////////////////////////////////////////////////////
 [ login ]*/
+
 .limiter {
   width: 100%;
   margin: 0 auto;
@@ -162,17 +147,20 @@ iframe {
   justify-content: center;
   align-items: center;
   padding: 15px;
-
-  background: #2575fc;
-  background: -webkit-linear-gradient(left, #6a11cb, #2575fc);
-  background: -o-linear-gradient(left, #6a11cb, #2575fc);
-  background: -moz-linear-gradient(left, #6a11cb, #2575fc);
-  background: linear-gradient(left, #6a11cb, #2575fc);
-
+  background: #e9faff;
 }
 
 .wrap-login100 {
-  width: 560px;
+  width: 500px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+
+  box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  -o-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  -ms-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -181,117 +169,142 @@ iframe {
 
 .login100-form {
   width: 100%;
-  background-color: transparent;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-wrap: wrap;
 }
 
 .login100-form-title {
-  width: 100%;
   display: block;
   font-family: OpenSans-Regular;
   font-size: 30px;
-  color: #fefefe;
+  color: #555555;
   line-height: 1.2;
-  text-transform: uppercase;
   text-align: center;
 }
-
-
 
 /*------------------------------------------------------------------
 [ Input ]*/
 
 .wrap-input100 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  width: 50%;
-  height: 75px;
+  width: 100%;
   position: relative;
-  border: 1px solid #e0e0e0;
-  border-bottom: none;
   background-color: #fff;
+  border: 1px solid #e6e6e6;
 }
 
 .wrap-input100.rs1 {
-  border-top-left-radius: 12px;
-  border-right: none;
-}
-
-.wrap-input100.rs2 {
-  border-top-right-radius: 12px;
-}
-
-.label-input100 {
-  font-family: OpenSans-Bold;
-  font-size: 15px;
-  color: #555555;
-  line-height: 1.2;
-
-  display: block;
-  position: absolute;
-  pointer-events: none;
-  width: 100%;
-  padding-left: 30px;
-  left: 0;
-  top: 28px;
-
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
-  transition: all 0.4s;
+  border-top: none;
 }
 
 .input100 {
-  font-family: OpenSans-Bold;
-  font-size: 15px;
-  color: #555555;
-  line-height: 1.2;
-
   display: block;
   width: 100%;
   background: transparent;
-  padding: 0 30px;
+  font-family: OpenSans-Regular;
+  font-size: 15px;
+  color: #666666;
+  line-height: 1.2;
 }
 
+
+/*---------------------------------------------*/
 input.input100 {
+  height: 68px;
+  padding: 0 25px 0 25px;
+}
+
+/*------------------------------------------------------------------
+[ Focus Input ]*/
+
+.focus-input100-1, 
+.focus-input100-2 {
+  display: block;
+  position: absolute;
+  width: 100%;
   height: 100%;
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
-  transition: all 0.4s;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.focus-input100-1::before,
+.focus-input100-2::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 1px;
+  background-color: #4272d7;
+}
+
+.focus-input100-1::before {
+  top: -1px;
+  left: 0;
+}
+
+.focus-input100-2::before {
+  bottom: -1px;
+  right: 0;
+}
+
+.focus-input100-1::after,
+.focus-input100-2::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 1px;
+  height: 0;
+  background-color: #4272d7;
+}
+
+.focus-input100-1::after {
+  top: 0;
+  right: -1px;
+}
+
+.focus-input100-2::after {
+  bottom: 0;
+  left: -1px;
+}
+
+.input100:focus + .focus-input100-1::before {
+  -webkit-animation: full-w 0.2s linear 0s;
+  animation: full-w 0.2s linear 0s;
+  animation-fill-mode: both;
+  -webkit-animation-fill-mode: both;
+}
+
+.input100:focus + .focus-input100-1::after {
+  -webkit-animation: full-h 0.1s linear 0.2s;
+  animation: full-h 0.1s linear 0.2s;
+  animation-fill-mode: both;
+  -webkit-animation-fill-mode: both;
+}
+
+.input100:focus + .focus-input100-1 + .focus-input100-2::before {
+  -webkit-animation: full-w 0.2s linear 0.3s;
+  animation: full-w 0.2s linear 0.3s;
+  animation-fill-mode: both;
+  -webkit-animation-fill-mode: both;
+}
+
+.input100:focus + .focus-input100-1 + .focus-input100-2::after {
+  -webkit-animation: full-h 0.1s linear 0.5s;
+  animation: full-h 0.1s linear 0.5s;
+  animation-fill-mode: both;
+  -webkit-animation-fill-mode: both;
 }
 
 
-.input100:focus {
-  height: 55px;
+@keyframes full-w {
+  to {
+    width: calc(100% + 1px);
+  }
 }
 
-.input100:focus + .label-input100 {
-  top: 10px;
-  font-size: 13px;
-  color: #111111;
+@keyframes full-h {
+  to {
+    height: calc(100% + 1px);
+  }
 }
-
-.has-val {
-  height: 55px !important;
-}
-
-.has-val + .label-input100 {
-  top: 10px;
-  font-size: 13px;
-  color: #111111;
-}
-
 
 
 /*------------------------------------------------------------------
@@ -304,16 +317,9 @@ input.input100 {
   display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
 }
 
 .login100-form-btn {
-  font-family: OpenSans-Bold;
-  font-size: 15px;
-  color: #fff;
-  line-height: 1.2;
-  text-transform: uppercase;
-
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -323,34 +329,14 @@ input.input100 {
   align-items: center;
   padding: 0 20px;
   width: 100%;
-  height: 70px;
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
-  overflow: hidden;
-  background: #111111;
+  height: 60px;
+  background-color: #4272d7;
 
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
-  transition: all 0.4s;
-  position: relative;
-  z-index: 1;
-}
-
-.login100-form-btn::before {
-  content: "";
-  display: block;
-  position: absolute;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-
-  background: #2575fc;
-  background: -webkit-linear-gradient(right, #6a11cb, #2575fc);
-  background: -o-linear-gradient(right, #6a11cb, #2575fc);
-  background: -moz-linear-gradient(right, #6a11cb, #2575fc);
-  background: linear-gradient(right, #6a11cb, #2575fc);
+  font-family: OpenSans-Regular;
+  font-size: 14px;
+  color: #fff;
+  line-height: 1.2;
+  text-transform: uppercase;
 
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
@@ -359,16 +345,8 @@ input.input100 {
 }
 
 .login100-form-btn:hover {
-  background-color: transparent;
+  background-color: #333333;
 }
-.login100-form-btn:hover:before {
-  opacity: 1;
-}
-
-
-
-/*------------------------------------------------------------------
-[ Responsive ]*/
 
 
 /*------------------------------------------------------------------
@@ -381,7 +359,6 @@ input.input100 {
 .alert-validate::before {
   content: attr(data-validate);
   position: absolute;
-  z-index: 100;
   max-width: 70%;
   background-color: #fff;
   border: 1px solid #c80000;
@@ -396,7 +373,7 @@ input.input100 {
   right: 12px;
   pointer-events: none;
 
-  font-family: OpenSans-Bold;
+  font-family: OpenSans-Regular;
   color: #c80000;
   font-size: 13px;
   line-height: 1.4;
@@ -416,7 +393,6 @@ input.input100 {
   font-family: FontAwesome;
   display: block;
   position: absolute;
-  z-index: 110;
   color: #c80000;
   font-size: 16px;
   top: 50%;
@@ -442,19 +418,3 @@ input.input100 {
 
 
 
-/*//////////////////////////////////////////////////////////////////
-[ Responsive ]*/
-@media (max-width: 576px) {
-  .wrap-input100 {
-    width: 100%;
-  }
-
-  .wrap-input100.rs1 {
-    border-top-right-radius: 12px;
-    border-right: 1px solid #e0e0e0;
-  }
-
-  .wrap-input100.rs2 {
-    border-top-right-radius: 0px;
-  }
-}
