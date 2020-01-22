@@ -408,7 +408,9 @@ input.input100 {
   visibility: visible;
   opacity: 1;
 }
-
+.container-login100 {
+  background-image: url("../images/login2.jpg");
+}
 @media (max-width: 992px) {
   .alert-validate::before {
     visibility: visible;
