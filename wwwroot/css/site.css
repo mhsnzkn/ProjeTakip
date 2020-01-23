@@ -42,11 +42,12 @@ body {
 }
 
 .link_index {
+    font-size: x-large;
     color: #002246;
 }
 
 .link_index:hover {
-    font-size: x-large;
+    font-size: xx-large;
     text-decoration: none;
 }
 

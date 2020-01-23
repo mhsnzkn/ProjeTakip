@@ -11,17 +11,17 @@ using ProjeYonetim.Models;
 
 namespace ProjeYonetim.Controllers
 {
-    public class HomeController : Controller
+    public class AdminController : Controller
     {
         private readonly AppDbContext db;
 
-        public HomeController(AppDbContext db)
+        public AdminController(AppDbContext db)
         {
             this.db = db;
         }
         public async Task<IActionResult> Index()
         {
-            if (HttpContext.Session.GetInt32("userid") == null)
+            if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "Admin")
             {
                 return RedirectToAction("Login");
             }
@@ -62,7 +62,7 @@ namespace ProjeYonetim.Controllers
                 return RedirectToAction("Login");
             }
 
-            var reports = await db.RaporTurleri.Where(a => a.ModulId == id).OrderBy(a => a.Sira).ToListAsync();
+            var reports = await db.Raporlar.Where(a => a.ModulId == id).OrderBy(a => a.Sira).ToListAsync();
 
             return View(reports);
         }

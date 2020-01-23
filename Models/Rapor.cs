@@ -7,13 +7,15 @@ namespace ProjeYonetim.Models
         public int Id { get; set; }
         public int ProjeId { get; set; }
         public int ModulId { get; set; }
+        public int RaporTurId { get; set; }
         [StringLength(100)]
         public string Adi { get; set; }
         public int Sira { get; set; }
-        [StringLength(400)]
+        [StringLength(300)]
         public string Aciklama { get; set; }
         public virtual Proje Proje { get; set; }
         public virtual Modul Modul { get; set; }
+        public virtual RaporTur RaporTur { get; set; }
 
     }
 }

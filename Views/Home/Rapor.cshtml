@@ -1,4 +1,4 @@
-﻿@model List<ProjeYonetim.Models.Rapor>
+﻿@model List<ProjeYonetim.Models.RaporTur>
 @{
     ViewData["Title"] = "Raporlar";
 }
@@ -19,11 +19,10 @@
 {
     
     <div class="col-sm-12 my-3">
-       <a class="link_index" href="/files/@Model[i].Aciklama" target="blank">
+       <a href="#" class="link_index" data-toggle="modal" data-target=".bd-example-modal-lg" data-id="@Model[i].Id">
       <div class="card" >
-      <img class="card-img-top" src="" >
       <div class="card-body">
-      <p class="card-text" style="  text-align: center">@Model[i].Adi</p>
+      <p class="card-text" style="text-align: center">@Model[i].Adi</p>
       </div>
       </div>
       </a>
@@ -32,3 +31,30 @@
   
 </div>
 </div>
+
+<!-- Large modal -->
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title h4" id="modal_header">Raporlar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="list-group" id="modal_body">
+          <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+          ...
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@section Scripts{
+  <script src="~/js/rapor.js"></script>
+}

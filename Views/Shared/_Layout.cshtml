@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/lib/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="/lib/toastr/toastr.min.css" />
     
 </head>
 <body>
@@ -26,11 +27,30 @@
 </nav>
 
     <partial name="_CookieConsentPartial" />
+<div class="row">
+  <div class="col-lg-2">
+    <div class="list-group">
+      <a href="#" class="list-group-item list-group-item-action active">
+        Cras justo odio
+      </a>
+      <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+      <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+      <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+      <a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a>
+    </div>
+  </div>
+  <div class="col-lg-10">
 
     <div class="container body-content">
-        @RenderBody()
+      @RenderBody()
 
     </div>
+
+  </div>
+</div>
+
+
+    
     <footer class="text-center bg-light col-12" style="bottom:0;position:fixed;max-height:30px">
             <p>&copy; 2020 - Agartha Teknoloji</p>
         </footer>
@@ -38,6 +58,7 @@
     
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/toastr/toastr.min.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
 
         <script src="~/js/site.min.js" asp-append-version="true"></script>

@@ -8,10 +8,10 @@ namespace ProjeYonetim.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         { }
 
-        public DbSet<Altrapor> AltRaporlar { get; set; }
-        public DbSet<Modul> Modul { get; set; }
-        public DbSet<Proje> Proje { get; set; }
         public DbSet<Rapor> Raporlar { get; set; }
+        public DbSet<Modul> Moduller { get; set; }
+        public DbSet<Proje> Projeler { get; set; }
+        public DbSet<RaporTur> RaporTurleri { get; set; }
         public DbSet<Kullanici> Kullanici { get; set; }
     }
 }
