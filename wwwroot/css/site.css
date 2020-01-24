@@ -1,9 +1,5 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
 for details on configuring this project to bundle and minify static web assets. */
-body {
- /* background-image: url("../images/content3.jpg");
-  background-size: cover;  */
-}
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
@@ -27,83 +23,30 @@ body {
 #qrCode {
     margin: 15px;
 }
-
-.card {
-    background-color: rgba(243, 245, 247);
-    box-shadow: 0 0 8px black;
-    border-radius: 50px;
-}
-
-.card:hover {
-    text-decoration: none;
-    animation: animate-hover .5s;
-    transition: all .3s;
-    background-color: #17a2b8;
-    color: #fff;
-}
-
-.link_index {
-    font-size: x-large;
-    color: #002246;
-}
-
-.link_index:hover {
-    font-size: xx-large;
-    text-decoration: none;
+.card{
+    border: 1px solid #ffffff5e;
+    background-color: #2525251a !important;
 }
 
 
-.sidebar {
-    padding: 0;
-    width: 200px;
+.card:hover{
+    background-color: brown !important;
+    z-index: 3;
+}
+
+.body-bg{
+    background-image: url("../images/b.jpg");
+    background-size: cover;
     position: fixed;
     height: 100%;
-    background-image: url("../images/content.jpg");
-    background-size: cover;
-    overflow: auto;
-  }
-  
-  .sidebar a {
-    display: block;
-    color: black;
-    padding: 16px;
-    text-decoration: none;
-  }
-   
-  .sidebar a.active {
-    /* background-color: #4CAF50; */
-    color: white;
-  }
-  
-  .sidebar a:hover:not(.active) {
-    background-color: #555;
-    color: white;
-  }
-  
-
-  @media screen and (max-width: 700px) {
-    .sidebar {
-      width: 100%;
-      height: auto;
-      position: relative;
-    }
-    .sidebar a {float: left;}
-    div.content {margin-left: 0;}
-  }
-  
-  @media screen and (max-width: 400px) {
-    .sidebar a {
-      text-align: center;
-      float: none;
-    }
-  }
-  .navbar{
     width: 100%;
-    box-shadow: -7px 4px 20px black;
-    background-image: url("../images/n.jpg"); 
-    background-size: cover;
-  }
-
+}
+.mask{
+    position:fixed;
+    height:100%;
+    width:100%;
+    background-color: #000000bd;
+}
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
 

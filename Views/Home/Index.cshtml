@@ -2,42 +2,23 @@
 @{
     ViewData["Title"] = "Modüller";
 }
-<div class="row mr-0">
-   <div class="col-2">
-      <div class="sidebar">
-         <a class="active" href="#home">Home</a>
-         <a href="#news">News</a>
-         <a href="#contact">Contact</a>
-         <a href="#about">About</a>
-      </div>
-   </div>
-   <div class="col-9">
-      <div class="content">
-         <nav aria-label="breadcrumb" style="margin-top:30px">
-            <ol class="breadcrumb">
-               <li class="breadcrumb-item active" aria-current="page">Modüller</li>
-            </ol>
-         </nav>
+<div class="body-bg">
+   <div class="mask"></div>
 
-         <div style="height:90px"></div>
+   <div class="row mr-0 mt-2">
 
-         <div class="container">
-            <div class="row mx-5">
-
-               @for (int i = 0; i < Model.Count; i++) { var cls="col-sm-6" ; if(Model[i].Sira==0){ cls="col-sm-12" ; }
-                  <div class="@cls my-3">
-                  <a class="link_index" asp-action="Rapor" asp-route-id="@Model[i].Id">
-                     <div class="card">
-                        <div class="card-body">
-                           <p class="card-text" style="  text-align: center">@Model[i].Adi</p>
-                        </div>
-                     </div>
-                  </a>
-            </div>
-            }
-
-         </div>
-      </div>
-   </div>
+      @for(int i=0;i<4;i++){
+         <div class="card col-lg-4 p-3" style="min-height:350px" >
+            <a href="#" style="text-decoration:none">
+  <div class="card-body text-center">
+    <i class="fas fa-user fa-10x" style="color:white"></i>
+  </div><br>
+  <div class=" text-center">
+    <span class="" style="font-size:xx-large;color:white">asdfasdafd</span>
+  </div>
+  </a>
 </div>
-</div>
+      }
+      
+ </div>
+ </div>
