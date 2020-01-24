@@ -45,6 +45,7 @@ namespace ProjeYonetim.Controllers
             if (dbuser != null)
             {
                 HttpContext.Session.SetInt32("userid", dbuser.Id);
+                //HttpContext.Session.SetString("role", dbuser.Role);
                 return RedirectToAction("Index");
             }
             else
@@ -65,6 +66,41 @@ namespace ProjeYonetim.Controllers
             var reports = await db.RaporTurleri.Where(a => a.ModulId == id).OrderBy(a => a.Sira).ToListAsync();
 
             return View(reports);
+        }
+
+        public async Task<IActionResult> GetRapor(int id)
+        {
+            if (HttpContext.Session.GetInt32("userid") == null)
+            {
+                return RedirectToAction("Login");
+            }
+            var file = await db.Raporlar.FindAsync(id);
+            var extension = System.IO.Path.GetExtension(file.Aciklama);
+            string contentType = null;
+            switch (extension)
+            {
+                case ".pdf":
+                    contentType = "application/pdf";
+                    break;
+                case ".doc":
+                    contentType = "application/msword";
+                    break;
+                case ".docx":
+                    contentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+                    break;
+                case ".xls":
+                    contentType = "application/vnd.ms-excel";
+                    break;
+                case ".xlsx":
+                    contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                    break;
+
+                default:
+                    contentType = "application/ocet-stream";
+                    break;
+            }
+
+            return File("/files/" + file.Aciklama, contentType ?? "application/octet-stream", file.Aciklama);
         }
 
         public IActionResult Logout()
