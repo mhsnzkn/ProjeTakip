@@ -69,6 +69,29 @@ namespace ProjeYonetim.Controllers
 
             return View(model);
         }
+        public IActionResult AddModul()
+        {
+            // if (HttpContext.Session.GetInt32("userid") == null)
+            // {
+            //     return RedirectToAction("Login");
+            // }
+            
+            
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddModul(Modul modul)
+        {
+            // if (HttpContext.Session.GetInt32("userid") == null)
+            // {
+            //     return RedirectToAction("Login");
+            // }
+
+            db.Add(modul);
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Modul");
+        }
 
         public IActionResult Logout()
         {

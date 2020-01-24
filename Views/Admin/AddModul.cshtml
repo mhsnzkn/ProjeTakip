@@ -1,0 +1,23 @@
+@model ProjeYonetim.Models.Modul
+@{
+    ViewData["Title"] = "Modül Ekle";
+}
+
+<div style="height:100px"></div>
+@using(Html.BeginForm()){
+  <input class="form-control" type="hidden" name="ProjeId" value='@ViewContext.RouteData.Values["id"]'>
+  
+  <div class="form-group">
+    <label>Adı</label>
+    @Html.TextBoxFor(m=>m.Adi,new {@class="form-control"})
+  </div>
+  <div class="form-group">
+    <label>Sıra</label>
+    @Html.TextBoxFor(m=>m.Sira,new {@class="form-control"})
+  </div>
+
+  <div class="d-flex justify-content-between">
+  <a asp-controller="Admin" asp-action="Index" class="btn btn-secondary">Geri Dön</a> 
+  <button type="submit" class="btn btn-success">Kaydet</button>
+  </div>
+}

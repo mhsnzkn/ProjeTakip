@@ -1,7 +1,8 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
 for details on configuring this project to bundle and minify static web assets. */
 body {
-    background-image: url("../images/e.jpg");
+ /* background-image: url("../images/content3.jpg");
+  background-size: cover;  */
 }
 
 /* Wrapping element */
@@ -52,6 +53,56 @@ body {
 }
 
 
+.sidebar {
+    padding: 0;
+    width: 200px;
+    position: fixed;
+    height: 100%;
+    background-image: url("../images/content.jpg");
+    background-size: cover;
+    overflow: auto;
+  }
+  
+  .sidebar a {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+  }
+   
+  .sidebar a.active {
+    /* background-color: #4CAF50; */
+    color: white;
+  }
+  
+  .sidebar a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+  }
+  
+
+  @media screen and (max-width: 700px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+    .sidebar a {float: left;}
+    div.content {margin-left: 0;}
+  }
+  
+  @media screen and (max-width: 400px) {
+    .sidebar a {
+      text-align: center;
+      float: none;
+    }
+  }
+  .navbar{
+    width: 100%;
+    box-shadow: -7px 4px 20px black;
+    background-image: url("../images/n.jpg"); 
+    background-size: cover;
+  }
 
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
