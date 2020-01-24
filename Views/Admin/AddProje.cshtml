@@ -1,0 +1,17 @@
+@model ProjeYonetim.Models.Proje
+@{
+    ViewData["Title"] = "Proje Ekle";
+}
+
+<div style="height:100px"></div>
+@using(Html.BeginForm()){
+  <div class="form-group">
+    <label>Adı</label>
+    @Html.TextBoxFor(m=>m.Adi,new {@class="form-control"})
+  </div>
+
+  <div class="d-flex justify-content-between">
+  <a asp-controller="Admin" asp-action="Index" class="btn btn-secondary">Geri Dön</a> 
+  <button type="submit" class="btn btn-success">Kaydet</button>
+  </div>
+}

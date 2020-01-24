@@ -21,50 +21,53 @@ namespace ProjeYonetim.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "Admin")
-            {
-                return RedirectToAction("Login");
-            }
+            // if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "Admin")
+            // {
+            //     return RedirectToAction("Login", "Home");
+            // }
 
-            var projeid = Utils.SD.projeid;
+            var model = await db.Projeler.ToListAsync();
 
-            var moduls = await db.Moduller.Where(a => a.ProjeId == projeid).OrderBy(a => a.Sira).ToListAsync();
-
-            return View(moduls);
+            return View(model);
         }
 
-        public IActionResult Login()
+        public async Task<IActionResult> EditProje(int id)
+        {
+            var model = await db.Projeler.FindAsync(id);
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditProje(Proje proje)
+        {
+            db.Projeler.Update(proje);
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
+        public IActionResult AddProje()
         {
 
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Login(Kullanici user)
+        public async Task<IActionResult> AddProje(Proje proje)
         {
-            var dbuser = await db.Kullanici.Where(a => a.Username == user.Username && a.Password == user.Password).FirstOrDefaultAsync();
-            if (dbuser != null)
-            {
-                HttpContext.Session.SetInt32("userid", dbuser.Id);
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                ViewData["error"] = "*Kullanıcı adı veya şifre hatalı";
-            }
+            db.Projeler.Add(proje);
+            await db.SaveChangesAsync();
 
-            return View();
+            return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> Rapor(int id)
+        public async Task<IActionResult> Modul(int id)
         {
-            if (HttpContext.Session.GetInt32("userid") == null)
-            {
-                return RedirectToAction("Login");
-            }
+            // if (HttpContext.Session.GetInt32("userid") == null)
+            // {
+            //     return RedirectToAction("Login");
+            // }
 
-            var reports = await db.Raporlar.Where(a => a.ModulId == id).OrderBy(a => a.Sira).ToListAsync();
+            var model = await db.Moduller.Where(a => a.ProjeId == id).OrderBy(a => a.Sira).ToListAsync();
 
-            return View(reports);
+            return View(model);
         }
 
         public IActionResult Logout()
