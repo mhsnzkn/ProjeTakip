@@ -45,7 +45,7 @@ namespace ProjeYonetim.Controllers
             if (dbuser != null)
             {
                 HttpContext.Session.SetInt32("userid", dbuser.Id);
-                //HttpContext.Session.SetString("role", dbuser.Role);
+                HttpContext.Session.SetString("role", dbuser.Role);
                 return RedirectToAction("Index");
             }
             else

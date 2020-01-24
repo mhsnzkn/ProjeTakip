@@ -21,10 +21,10 @@ namespace ProjeYonetim.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            // if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "Admin")
-            // {
-            //     return RedirectToAction("Login", "Home");
-            // }
+            if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
 
             var model = await db.Projeler.ToListAsync();
 
@@ -33,12 +33,22 @@ namespace ProjeYonetim.Controllers
 
         public async Task<IActionResult> EditProje(int id)
         {
+            if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             var model = await db.Projeler.FindAsync(id);
             return View(model);
         }
         [HttpPost]
         public async Task<IActionResult> EditProje(Proje proje)
         {
+            if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             db.Projeler.Update(proje);
             await db.SaveChangesAsync();
 
@@ -46,12 +56,21 @@ namespace ProjeYonetim.Controllers
         }
         public IActionResult AddProje()
         {
+            if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
 
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> AddProje(Proje proje)
         {
+            if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             db.Projeler.Add(proje);
             await db.SaveChangesAsync();
 
@@ -60,10 +79,10 @@ namespace ProjeYonetim.Controllers
 
         public async Task<IActionResult> Modul(int id)
         {
-            // if (HttpContext.Session.GetInt32("userid") == null)
-            // {
-            //     return RedirectToAction("Login");
-            // }
+            if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
 
             var model = await db.Moduller.Where(a => a.ProjeId == id).OrderBy(a => a.Sira).ToListAsync();
 
@@ -71,21 +90,21 @@ namespace ProjeYonetim.Controllers
         }
         public IActionResult AddModul()
         {
-            // if (HttpContext.Session.GetInt32("userid") == null)
-            // {
-            //     return RedirectToAction("Login");
-            // }
-            
-            
+            if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> AddModul(Modul modul)
         {
-            // if (HttpContext.Session.GetInt32("userid") == null)
-            // {
-            //     return RedirectToAction("Login");
-            // }
+            if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
 
             db.Add(modul);
             await db.SaveChangesAsync();
@@ -93,12 +112,7 @@ namespace ProjeYonetim.Controllers
             return RedirectToAction("Modul");
         }
 
-        public IActionResult Logout()
-        {
-            HttpContext.Session.Clear();
 
-            return RedirectToAction("Login");
-        }
 
 
 
