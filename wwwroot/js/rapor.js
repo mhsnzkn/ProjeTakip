@@ -19,14 +19,10 @@ $('.link_index').click(function () {
         success: function (res) {
             var txt = "";
             res.forEach(elm => {
-                //txt += `<li ` + elm.aciklama + `" class="list-group-item">` + elm.adi + `</li>`;
                 txt += `<li class="list-group-item">
                 <div class="d-flex justify-content-between">
+                  <div>` + elm.adi + `</div>
                   <div>
-                  ` + elm.adi + `
-                  </div>
-                  <div>
-                    
                 <a href="/files/` + elm.aciklama + `" class="btn btn-sm btn-primary" target="_blank">Görüntüle</a>
                 <a href="/Home/GetRapor/` + elm.id + `" class="btn btn-sm btn-danger">İndir</a>
                 <span title="` + (new Date(elm.tarih)).toLocaleDateString() + `"><i class="fas fa-info-circle" style="color:#17a2b8"></i></span>
