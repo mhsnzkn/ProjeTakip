@@ -3,6 +3,9 @@ for details on configuring this project to bundle and minify static web assets. 
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
+.body{
+    overflow-y: hidden;
+}
 
 .body-content {
     padding-left: 15px;
