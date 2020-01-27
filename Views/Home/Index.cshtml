@@ -11,7 +11,7 @@
          <div class="card col-lg-4 p-3" style="min-height:350px">
            <a asp-action="Rapor" asp-route-id="@item.Id" style="text-decoration:none">
              <div class="card-body text-center">
-               <i class="fas fa-user fa-10x" style="color:white"></i>
+               @Html.Raw(item.Fontawesome)
              </div><br>
              <div class=" text-center">
                <span class="" style="font-size:xx-large;color:white">@item.Adi</span>
