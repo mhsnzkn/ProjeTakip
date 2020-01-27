@@ -24,7 +24,7 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        @if (HttpContext.Session.GetString("role") != null || HttpContext.Session.GetString("role") == "admin")
+        @if (Context.Session.GetString("role") != null || Context.Session.GetString("role") == "admin")
         {
         <li class="nav-item active">
           <a class="nav-link" href="/Admin">Yönetim Paneli</a>
