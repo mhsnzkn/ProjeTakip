@@ -8,5 +8,7 @@ namespace ProjeYonetim.Models
         public int Id { get; set; }
         [StringLength(50)]
         public string Adi { get; set; }
+        public int Sira { get; set; }
+        public bool Active { get; set; }
     }
 }

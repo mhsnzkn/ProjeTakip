@@ -11,5 +11,6 @@ namespace ProjeYonetim.Models
         public string Password { get; set; }
         [StringLength(10)]
         public string Role { get; set; }
+        public bool Active { get; set; }
     }
 }

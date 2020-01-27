@@ -3,12 +3,19 @@
     ViewData["Title"] = "Projeler";
 }
 
-<div style="height:100px"></div>
+
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Projeler</li>
+  </ol>
+</nav>
+
 <div class="d-flex justify-content-end">
     @Html.ActionLink("Yeni Proje","AddProje","Admin",null,new {@class="btn btn-info m-1"})
 </div>
 <table class="table">
-    <thead class="thead-light">
+    <thead class="table-primary">
         <tr class="text-center">
             <th>Proje Adı</th>
             <th></th>
@@ -19,8 +26,8 @@
         {
             <tr class="text-center">
                 <th>@item.Adi</th>
-                <th><a asp-action="EditProje" asp-route-id="@item.Id" class="btn btn-warning m-1">Düzenle</a>
-                <a asp-action="Modul" asp-route-id="@item.Id" class="btn btn-primary m-1">Listele</a></th>
+                <th><a asp-action="EditProje" asp-route-projeid="@item.Id" class="btn btn-warning m-1">Düzenle</a>
+                <a asp-action="Modul" asp-route-projeid="@item.Id" class="btn btn-primary m-1">Listele</a></th>
             </tr>
         }
     </tbody>

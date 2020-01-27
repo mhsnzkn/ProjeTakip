@@ -1,0 +1,44 @@
+@model ProjeYonetim.Models.Rapor
+@{
+    ViewData["Title"] = "Modül Ekle";
+}
+
+<div style="height:100px"></div>
+
+<div class="container">
+<form method="post" action="/Admin/AddRapor">
+
+  <input class="form-control" type="hidden" name="ProjeId" value='@ViewContext.RouteData.Values["projeid"]'>
+  <input class="form-control" type="hidden" name="ModulId" value='@ViewContext.RouteData.Values["modulid"]'>
+  <input class="form-control" type="hidden" name="RaporTurId" value='@ViewContext.RouteData.Values["raporturuid"]'>
+  
+  <div class="form-group">
+    <label>Adı</label>
+    @Html.TextBoxFor(m=>m.Adi,new {@class="form-control"})
+  </div>
+  <div class="form-group">
+    <label>Sıra</label>
+    @Html.TextBoxFor(m=>m.Sira,new {@class="form-control"})
+  </div>
+  <div class="form-group">
+    <label>Dosya Adı</label>
+    @Html.TextBoxFor(m=>m.Aciklama,new {@class="form-control"})
+  </div>
+  <div class="form-group">
+    <label>Aktif</label>
+    @Html.CheckBoxFor(m=>m.Active,new {@class="form-control"})
+  </div>
+  <div class="form-group">
+    <label>Tarih</label>
+    @Html.TextBoxFor(m=>m.Tarih,new {@class="form-control",@type="date"})
+  </div>
+
+  <div class="d-flex justify-content-between">
+  <a asp-controller="Admin" asp-action="Raporlar" asp-route-projeid='@ViewContext.RouteData.Values["projeid"]' asp-route-modulid='@ViewContext.RouteData.Values["modulid"]'
+  asp-route-raporturuid='@ViewContext.RouteData.Values["raporturuid"]' class="btn btn-secondary">Geri Dön</a> 
+  <button type="submit" class="btn btn-success">Kaydet</button>
+  </div>
+
+</form>
+
+</div>

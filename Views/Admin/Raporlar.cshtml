@@ -1,0 +1,40 @@
+@model List<ProjeYonetim.Models.Rapor>
+@{
+    ViewData["Title"] = "Projeler";
+}
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/Admin">Projeler</a></li>
+    <li class="breadcrumb-item"><a asp-controller="Admin" asp-action="Modul" asp-route-projeid='@ViewContext.RouteData.Values["projeid"]'>Modüller</a></li>
+    <li class="breadcrumb-item"><a asp-controller="Admin" asp-action="RaporTuru" asp-route-projeid='@ViewContext.RouteData.Values["projeid"]'
+    asp-route-modulid='@ViewContext.RouteData.Values["modulid"]'>Rapor Türleri</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Raporlar</li>
+  </ol>
+</nav>
+
+<div class="d-flex justify-content-end">
+    <a href='/Admin/AddRapor/@ViewContext.RouteData.Values["projeid"]/@ViewContext.RouteData.Values["modulid"]/@ViewContext.RouteData.Values["raporturuid"]'
+    class="btn btn-info m-1">Yeni Rapor</a>
+</div>
+<table class="table">
+    <thead class="thead-light">
+        <tr class="text-center">
+            <th>Rapor Adı</th>
+            <th>Sıra</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="text-center">
+                <th>@item.Adi</th>
+                <th>@item.Sira</th>
+                <th><a asp-action="EditRapor" asp-route-projeid='@item.ProjeId'
+                asp-route-modulid='@item.ModulId' asp-route-raporturuid="@item.RaporTurId" asp-route-raporid="@item.Id" class="btn btn-warning m-1">Düzenle</a>
+                <a href="/files/@item.Aciklama" target="_blank" class="btn btn-danger m-1">Görüntüle</a></th>
+            </tr>
+        }
+    </tbody>
+</table>

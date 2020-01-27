@@ -1,11 +1,18 @@
 @model List<ProjeYonetim.Models.Modul>
 @{
-    ViewData["Title"] = "Projeler";
+    ViewData["Title"] = "Modüller";
 }
 
-<div style="height:100px"></div>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/Admin">Projeler</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Modüller</li>
+  </ol>
+</nav>
+
+
 <div class="d-flex justify-content-end">
-    <a href='/Admin/AddModul/@ViewContext.RouteData.Values["id"]' class="btn btn-info m-1">Yeni Modül</a>
+    <a href='/Admin/AddModul/@ViewContext.RouteData.Values["projeid"]' class="btn btn-info m-1">Yeni Modül</a>
 </div>
 <table class="table">
     <thead class="thead-light">
@@ -21,8 +28,8 @@
             <tr class="text-center">
                 <th>@item.Adi</th>
                 <th>@item.Sira</th>
-                <th><a asp-action="ProjeEdit" asp-route-id="@item.Id" class="btn btn-warning m-1">Düzenle</a>
-                <a asp-action="Modul" asp-route-id="@item.Id" class="btn btn-primary m-1">Listele</a></th>
+                <th><a asp-action="EditModul" asp-route-projeid="@item.ProjeId" asp-route-modulid="@item.Id" class="btn btn-warning m-1">Düzenle</a>
+                <a asp-action="RaporTuru" asp-route-projeid="@item.ProjeId" asp-route-modulid="@item.Id" class="btn btn-primary m-1">Listele</a></th>
             </tr>
         }
     </tbody>

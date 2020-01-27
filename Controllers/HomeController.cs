@@ -28,7 +28,7 @@ namespace ProjeYonetim.Controllers
 
             var projeid = Utils.SD.projeid;
 
-            var moduls = await db.Moduller.Where(a => a.ProjeId == projeid).OrderBy(a => a.Sira).ToListAsync();
+            var moduls = await db.Moduller.Where(a => a.ProjeId == projeid && a.Active).OrderBy(a => a.Sira).ToListAsync();
 
             return View(moduls);
         }
@@ -63,10 +63,12 @@ namespace ProjeYonetim.Controllers
                 return RedirectToAction("Login");
             }
 
-            var reports = await db.RaporTurleri.Where(a => a.ModulId == id).OrderBy(a => a.Sira).ToListAsync();
+            var reports = await db.RaporTurleri.Where(a => a.ModulId == id && a.Active).OrderBy(a => a.Sira).ToListAsync();
 
             return View(reports);
         }
+
+
 
         public async Task<IActionResult> GetRapor(int id)
         {

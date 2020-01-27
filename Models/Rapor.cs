@@ -14,6 +14,7 @@ namespace ProjeYonetim.Models
         public int Sira { get; set; }
         [StringLength(300)]
         public string Aciklama { get; set; }
+        public bool Active { get; set; }
         public DateTime Tarih { get; set; }
         public DateTime CrtDate { get; set; }
         public virtual Proje Proje { get; set; }
