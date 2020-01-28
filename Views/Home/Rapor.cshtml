@@ -2,27 +2,36 @@
 @{
     ViewData["Title"] = "Raporlar";
 }
-
+ 
 <div class="body-bg">
    <div class="mask"></div>
 
 @* <div style="height:90px"></div> *@
 
+
+<div class="form-inline m-2" style="z-index:4;position:absolute;right:50px">
+      <a href="/Home/Logout" title="Hat Yönetim Sistemi" class="btn btn-outline-danger btn-lg ">
+      <i class="fas fa-arrow-circle-up mr-1"></i><span>Link'e Git</span></a>
+    </div>
+
 <div class="container">
 <div class="row m-5">
-
+    
 @for (int i = 0; i < Model.Count; i++)
 {
     
     <div class="col-sm-12 my-3">
-       <a href="#" class="link_index text-decoration-none" data-toggle="modal" data-target=".bd-example-modal-lg" data-id="@Model[i].Id">
-      <div class="card" >
+
+  <a href="#" class="link_index text-decoration-none" data-toggle="modal" data-target=".bd-example-modal-lg"
+    data-id="@Model[i].Id">
+    
+    <div class="card">
       <div class="card-body">
-      <p class="card-text text-light text-center" style="font-size:x-large">@Model[i].Adi</p>
+        <p class="card-text text-light text-center" style="font-size:x-large">@Model[i].Adi</p>
       </div>
-      </div>
-      </a>
-   </div>
+    </div>
+  </a>
+</div>
 }
   
   <div style="height:60px"></div>
