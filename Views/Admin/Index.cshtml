@@ -18,6 +18,7 @@
     <thead class="table-primary">
         <tr class="text-center">
             <th>Proje Adı</th>
+            <th>Aktif</th>
             <th></th>
         </tr>
     </thead>
@@ -26,6 +27,11 @@
         {
             <tr class="text-center">
                 <th>@item.Adi</th>
+                @if(item.Active){
+                    <th><i class="fas fa-check-circle fa-lg" style="color:green"></i></th>
+                } else{
+                <th><i class="fas fa-times-circle fa-lg" style="color:red"></i></th>
+                }
                 <th><a asp-action="EditProje" asp-route-projeid="@item.Id" class="btn btn-warning m-1">Düzenle</a>
                 <a asp-action="Modul" asp-route-projeid="@item.Id" class="btn btn-primary m-1">Listele</a></th>
             </tr>

@@ -70,13 +70,13 @@ namespace ProjeYonetim.Controllers
 
 
 
-        public async Task<IActionResult> GetRapor(int id)
+        public async Task<IActionResult> GetRapor(int rapor)
         {
             if (HttpContext.Session.GetInt32("userid") == null)
             {
                 return RedirectToAction("Login");
             }
-            var file = await db.Raporlar.FindAsync(id);
+            var file = await db.Raporlar.FindAsync(rapor);
             var extension = System.IO.Path.GetExtension(file.Aciklama);
             string contentType = null;
             switch (extension)

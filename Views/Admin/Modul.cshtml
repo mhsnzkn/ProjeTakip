@@ -19,6 +19,7 @@
         <tr class="text-center">
             <th>Modul Adı</th>
             <th>Sıra</th>
+            <th>Aktif</th>
             <th></th>
         </tr>
     </thead>
@@ -28,6 +29,11 @@
             <tr class="text-center">
                 <th>@item.Adi</th>
                 <th>@item.Sira</th>
+                @if(item.Active){
+                    <th><i class="fas fa-check-circle fa-lg" style="color:green"></i></th>
+                } else{
+                <th><i class="fas fa-times-circle fa-lg" style="color:red"></i></th>
+                }
                 <th><a asp-action="EditModul" asp-route-projeid="@item.ProjeId" asp-route-modulid="@item.Id" class="btn btn-warning m-1">Düzenle</a>
                 <a asp-action="RaporTuru" asp-route-projeid="@item.ProjeId" asp-route-modulid="@item.Id" class="btn btn-primary m-1">Listele</a></th>
             </tr>

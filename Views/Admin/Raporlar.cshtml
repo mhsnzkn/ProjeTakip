@@ -22,6 +22,7 @@
         <tr class="text-center">
             <th>Rapor Adı</th>
             <th>Sıra</th>
+            <th>Aktif</th>
             <th></th>
         </tr>
     </thead>
@@ -31,6 +32,11 @@
             <tr class="text-center">
                 <th>@item.Adi</th>
                 <th>@item.Sira</th>
+                @if(item.Active){
+                    <th><i class="fas fa-check-circle fa-lg" style="color:green"></i></th>
+                } else{
+                <th><i class="fas fa-times-circle fa-lg" style="color:red"></i></th>
+                }
                 <th><a asp-action="EditRapor" asp-route-projeid='@item.ProjeId'
                 asp-route-modulid='@item.ModulId' asp-route-raporturuid="@item.RaporTurId" asp-route-raporid="@item.Id" class="btn btn-warning m-1">Düzenle</a>
                 <a href="/files/@item.Aciklama" target="_blank" class="btn btn-danger m-1">Görüntüle</a></th>

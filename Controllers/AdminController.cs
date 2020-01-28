@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,10 +16,12 @@ namespace ProjeYonetim.Controllers
     public class AdminController : Controller
     {
         private readonly AppDbContext db;
+        private readonly IHostingEnvironment hosting;
 
-        public AdminController(AppDbContext db)
+        public AdminController(AppDbContext db, IHostingEnvironment hosting)
         {
             this.db = db;
+            this.hosting = hosting;
         }
         public async Task<IActionResult> Index()
         {
@@ -166,7 +170,7 @@ namespace ProjeYonetim.Controllers
             db.Add(raportur);
             await db.SaveChangesAsync();
 
-            return RedirectToAction("RaporTuru", "Admin", new { modulid = raportur.ModulId });
+            return RedirectToAction("RaporTuru", "Admin", new { projeid = raportur.ProjeId, modulid = raportur.ModulId });
         }
         public async Task<IActionResult> EditRaporTuru(int raporturuid)
         {
@@ -189,12 +193,9 @@ namespace ProjeYonetim.Controllers
             db.Update(raportur);
             await db.SaveChangesAsync();
 
-            return RedirectToAction("RaporTuru", "Admin", new { modulid = raportur.ModulId });
+            return RedirectToAction("RaporTuru", "Admin", new { projeid = raportur.ProjeId, modulid = raportur.ModulId });
         }
-        //*************************************
-        //*************************************
-        //*************************************
-        //BURDA KALDIM
+
         public async Task<IActionResult> Raporlar(int raporturuid)
         {
             if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "admin")
@@ -202,7 +203,7 @@ namespace ProjeYonetim.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            var model = await db.Raporlar.Where(a => a.RaporTurId == raporturuid && a.Active).OrderBy(a => a.Sira).ToListAsync();
+            var model = await db.Raporlar.Where(a => a.RaporTurId == raporturuid).OrderBy(a => a.Sira).ToListAsync();
 
             return View(model);
         }
@@ -216,11 +217,29 @@ namespace ProjeYonetim.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> AddRapor(Rapor rapor)
+        public async Task<IActionResult> AddRapor(Rapor rapor, IFormFile file)
         {
             if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "admin")
             {
                 return RedirectToAction("Index", "Home");
+            }
+
+            if (file != null)
+            {
+                try
+                {
+                    var filename = Path.GetFileName(file.FileName);
+                    var destination = Path.Combine(hosting.WebRootPath, "files", filename);
+                    using (var fs = new FileStream(destination, FileMode.Create))
+                    {
+                        await file.CopyToAsync(fs);
+                    }
+                    rapor.Aciklama = filename;
+                }
+                catch
+                {
+                    rapor.Aciklama = null;
+                }
             }
 
             rapor.CrtDate = DateTime.Now;
@@ -241,13 +260,29 @@ namespace ProjeYonetim.Controllers
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> EditRapor(Rapor rapor)
+        public async Task<IActionResult> EditRapor(Rapor rapor, IFormFile file)
         {
             if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "admin")
             {
                 return RedirectToAction("Index", "Home");
             }
-
+            if (file != null)
+            {
+                try
+                {
+                    var filename = Path.GetFileName(file.FileName);
+                    var destination = Path.Combine(hosting.WebRootPath, "files", filename);
+                    using (var fs = new FileStream(destination, FileMode.Create))
+                    {
+                        await file.CopyToAsync(fs);
+                    }
+                    rapor.Aciklama = filename;
+                }
+                catch
+                {
+                    rapor.Aciklama = null;
+                }
+            }
             db.Update(rapor);
             await db.SaveChangesAsync();
 
