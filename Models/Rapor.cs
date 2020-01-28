@@ -17,6 +17,7 @@ namespace ProjeYonetim.Models
         public bool Active { get; set; }
         public DateTime Tarih { get; set; }
         public DateTime CrtDate { get; set; }
+        public DateTime? UptDate { get; set; }
         public virtual Proje Proje { get; set; }
         public virtual Modul Modul { get; set; }
         public virtual RaporTur RaporTur { get; set; }

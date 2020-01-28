@@ -52,6 +52,7 @@ namespace ProjeYonetim.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+            proje.UptDate = DateTime.Now;
 
             db.Projeler.Update(proje);
             await db.SaveChangesAsync();
@@ -74,6 +75,7 @@ namespace ProjeYonetim.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+            proje.CrtDate = DateTime.Now;
 
             db.Projeler.Add(proje);
             await db.SaveChangesAsync();
@@ -109,6 +111,7 @@ namespace ProjeYonetim.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+            modul.CrtDate = DateTime.Now;
 
             db.Add(modul);
             await db.SaveChangesAsync();
@@ -132,6 +135,7 @@ namespace ProjeYonetim.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+            modul.UptDate = DateTime.Now;
 
             db.Update(modul);
             await db.SaveChangesAsync();
@@ -166,7 +170,7 @@ namespace ProjeYonetim.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-
+            raportur.CrtDate = DateTime.Now;
             db.Add(raportur);
             await db.SaveChangesAsync();
 
@@ -189,7 +193,7 @@ namespace ProjeYonetim.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-
+            raportur.UptDate = DateTime.Now;
             db.Update(raportur);
             await db.SaveChangesAsync();
 
@@ -283,6 +287,7 @@ namespace ProjeYonetim.Controllers
                     rapor.Aciklama = null;
                 }
             }
+            rapor.UptDate = DateTime.Now;
             db.Update(rapor);
             await db.SaveChangesAsync();
 

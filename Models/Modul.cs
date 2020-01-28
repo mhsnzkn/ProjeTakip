@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace ProjeYonetim.Models
@@ -11,7 +12,11 @@ namespace ProjeYonetim.Models
         public int Sira { get; set; }
         [StringLength(100)]
         public string Fontawesome { get; set; }
+        [StringLength(150)]
+        public string DemoLink { get; set; }
         public bool Active { get; set; }
+        public DateTime CrtDate { get; set; }
+        public DateTime? UptDate { get; set; }
         public virtual Proje Proje { get; set; }
     }
 }

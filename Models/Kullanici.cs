@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace ProjeYonetim.Models
@@ -12,5 +13,7 @@ namespace ProjeYonetim.Models
         [StringLength(10)]
         public string Role { get; set; }
         public bool Active { get; set; }
+        public DateTime CrtDate { get; set; }
+        public DateTime? UptDate { get; set; }
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjeYonetim.Data;
 using ProjeYonetim.Models;
+using ProjeYonetim.Models.ViewModel;
 
 namespace ProjeYonetim.Controllers
 {
@@ -25,9 +26,7 @@ namespace ProjeYonetim.Controllers
             {
                 return RedirectToAction("Login");
             }
-
             var projeid = Utils.SD.projeid;
-
             var moduls = await db.Moduller.Where(a => a.ProjeId == projeid && a.Active).OrderBy(a => a.Sira).ToListAsync();
 
             return View(moduls);
@@ -56,16 +55,26 @@ namespace ProjeYonetim.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Rapor(int id)
+        public async Task<IActionResult> Rapor(int modulid)
         {
             if (HttpContext.Session.GetInt32("userid") == null)
             {
                 return RedirectToAction("Login");
             }
+            var model = new HomeRaporViewModel()
+            {
+                RaporTurler = await db.RaporTurleri.Where(a => a.ModulId == modulid && a.Active).OrderBy(a => a.Sira).Select(a => new RaporTur
+                {
+                    Id = a.Id,
+                    Adi = a.Adi
+                }).ToListAsync(),
+                Modul = await db.Moduller.Where(a => a.Id == modulid).Select(a => new Modul
+                {
+                    DemoLink = a.DemoLink
+                }).FirstOrDefaultAsync()
+            };
 
-            var reports = await db.RaporTurleri.Where(a => a.ModulId == id && a.Active).OrderBy(a => a.Sira).ToListAsync();
-
-            return View(reports);
+            return View(model);
         }
 
 

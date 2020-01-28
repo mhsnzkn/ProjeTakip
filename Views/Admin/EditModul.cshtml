@@ -11,21 +11,25 @@
   @Html.HiddenFor(m=>m.ProjeId)
   
   <div class="form-group">
-    <label>Adı</label>
-    @Html.TextBoxFor(m=>m.Adi,new {@class="form-control"})
-  </div>
-  <div class="form-group">
-    <label>Sıra</label>
-    @Html.TextBoxFor(m=>m.Sira,new {@class="form-control"})
-  </div>
-  <div class="form-group">
-    <label>Aktif</label>
-    @Html.CheckBoxFor(m=>m.Active,new {@class="form-control"})
-  </div>
-  <div class="form-group">
-    <label>Fontawesome Html</label>
-    @Html.TextBoxFor(m=>m.Fontawesome,new {@class="form-control"})
-  </div>
+  <label>Adı</label>
+  @Html.TextBoxFor(m=>m.Adi,new {@class="form-control"})
+</div>
+<div class="form-group">
+  <label>Sıra</label>
+  @Html.TextBoxFor(m=>m.Sira,new {@class="form-control"})
+</div>
+<div class="form-group">
+  <label>Aktif</label>
+  @Html.CheckBoxFor(m=>m.Active,new {@class="form-control"})
+</div>
+<div class="form-group">
+  <label>Site Linki</label>
+  @Html.TextBoxFor(m=>m.DemoLink,new {@class="form-control"})
+</div>
+<div class="form-group">
+  <label>Fontawesome Html</label>
+  @Html.TextBoxFor(m=>m.Fontawesome,new {@class="form-control"})
+</div>
 
   <div class="d-flex justify-content-between">
   <a asp-controller="Admin" asp-action="Modul" asp-route-projeid='@Model.ProjeId' class="btn btn-secondary">Geri Dön</a> 

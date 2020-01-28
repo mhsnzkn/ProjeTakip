@@ -5,7 +5,7 @@
 
 <div style="height:100px"></div>
 
-<div class="container">
+<form class="container">
 <form method="post" action="/Admin/AddModul">
 
   <input class="form-control" type="hidden" name="ProjeId" value='@ViewContext.RouteData.Values["projeid"]'>
@@ -23,6 +23,10 @@
     @Html.CheckBoxFor(m=>m.Active,new {@class="form-control"})
   </div>
   <div class="form-group">
+    <label>Site Linki</label>
+    @Html.TextBoxFor(m=>m.DemoLink,new {@class="form-control"})
+  </div>
+  <div class="form-group">
     <label>Fontawesome Html</label>
     @Html.TextBoxFor(m=>m.Fontawesome,new {@class="form-control"})
   </div>
@@ -34,4 +38,4 @@
 
 </form>
 
-</div>
+</form>

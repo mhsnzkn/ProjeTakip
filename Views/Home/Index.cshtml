@@ -9,7 +9,7 @@
      @foreach (var item in Model)
       {
          <div class="card col-lg-4 p-3" style="min-height:350px">
-           <a asp-action="Rapor" asp-route-id="@item.Id" style="text-decoration:none">
+           <a asp-action="Rapor" asp-route-projeid='@item.ProjeId' asp-route-modulid="@item.Id" style="text-decoration:none">
              <div class="card-body text-center">
                @Html.Raw(item.Fontawesome)
              </div><br>

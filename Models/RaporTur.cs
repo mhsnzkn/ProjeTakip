@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace ProjeYonetim.Models
@@ -13,6 +14,8 @@ namespace ProjeYonetim.Models
         [StringLength(400)]
         public string Aciklama { get; set; }
         public bool Active { get; set; }
+        public DateTime CrtDate { get; set; }
+        public DateTime? UptDate { get; set; }
         public virtual Proje Proje { get; set; }
         public virtual Modul Modul { get; set; }
 
