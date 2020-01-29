@@ -3,6 +3,10 @@
     ViewData["Title"] = "Projeler";
 }
 
+<div class="body-bg">
+    <div class="mask"></div>
+    <div class="container" style="position:relative;margin: 0 auto;">
+
 
 
 <nav aria-label="breadcrumb">
@@ -14,15 +18,15 @@
 <div class="d-flex justify-content-end">
     @Html.ActionLink("Yeni Proje","AddProje","Admin",null,new {@class="btn btn-info m-1"})
 </div>
-<table class="table">
-    <thead class="table-primary">
+<table class="table table-striped">
+    <thead class="table-dark" style="background-color:#5676c5">
         <tr class="text-center">
             <th>Proje Adı</th>
             <th>Aktif</th>
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="table-light">
         @foreach (var item in Model)
         {
             <tr class="text-center">
@@ -38,3 +42,7 @@
         }
     </tbody>
 </table>
+
+    
+</div>
+</div>

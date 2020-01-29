@@ -3,6 +3,10 @@
     ViewData["Title"] = "Projeler";
 }
 
+<div class="body-bg">
+    <div class="mask"></div>
+    <div class="container" style="position:relative;margin: 0 auto;">
+
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/Admin">Projeler</a></li>
@@ -14,8 +18,8 @@
 <div class="d-flex justify-content-end">
     <a href='/Admin/AddRaporTuru/@ViewContext.RouteData.Values["projeid"]/@ViewContext.RouteData.Values["modulid"]' class="btn btn-info m-1">Yeni Rapor Türü</a>
 </div>
-<table class="table">
-    <thead class="thead-light">
+<table class="table table-striped">
+    <thead class="table-dark" style="background-color:#5676c5">
         <tr class="text-center">
             <th>Rapor Türü Adı</th>
             <th>Sıra</th>
@@ -23,7 +27,7 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="table-light">
         @foreach (var item in Model)
         {
             <tr class="text-center">
@@ -42,3 +46,6 @@
         }
     </tbody>
 </table>
+
+    </div>
+    </div>
