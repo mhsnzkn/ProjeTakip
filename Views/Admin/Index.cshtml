@@ -22,6 +22,7 @@
     <thead class="table-dark" style="background-color:#5676c5">
         <tr class="text-center">
             <th>Proje Adı</th>
+            <th>Sıra</th>
             <th>Aktif</th>
             <th></th>
         </tr>
@@ -29,15 +30,18 @@
     <tbody class="table-light">
         @foreach (var item in Model)
         {
-            <tr class="text-center">
-                <th>@item.Adi</th>
+            <tr class="text-center t_row">
+                <td class="name">@item.Adi</td>
+                <td class="order">@item.Sira</td>
                 @if(item.Active){
-                    <th><i class="fas fa-check-circle fa-lg" style="color:green"></i></th>
+                    <td><i class="fas fa-check-circle fa-lg" style="color:green"></i></td>
                 } else{
-                <th><i class="fas fa-times-circle fa-lg" style="color:red"></i></th>
-                }
-                <th><a asp-action="EditProje" asp-route-projeid="@item.Id" class="btn btn-warning m-1">Düzenle</a>
-                <a asp-action="Modul" asp-route-projeid="@item.Id" class="btn btn-primary m-1">Listele</a></th>
+                <td><i class="fas fa-times-circle fa-lg" style="color:red"></i></td>
+                }<td>
+                @* <a asp-action="EditProje" asp-route-projeid="@item.Id" class="btn btn-warning m-1">Düzenle</a> *@
+                <a asp-action="Modul" asp-route-projeid="@item.Id" class="btn btn-danger m-1">Sil</a>
+                 <button type="button" data-toggle="modal" data-target=".bd-example-modal-lg-2" class="btn btn-warning m-1" onclick="editFunc(this.closest('.t_row'))">Düzenle</button>
+                <a asp-action="Modul" asp-route-projeid="@item.Id" class="btn btn-primary m-1">Listele</a></td>
             </tr>
         }
     </tbody>
@@ -47,7 +51,7 @@
 </div>
 </div>
 
-<!-- Large modal -->
+<!-- modal add -->
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -82,3 +86,55 @@
         </div>
     </div>
 </div>
+
+<!-- modal edit -->
+<div class="modal fade bd-example-modal-lg-2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel2"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">Proje Düzenle</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using(Html.BeginForm("AddProje","Admin",null,FormMethod.Post,true,null)){
+                    <input type="hidden" id="pid" name="Id" value="">
+                <div class="form-group">
+                    <label>Adı</label>
+                    @Html.TextBox("Adi","",new {@class="form-control",@id="EAdi"})
+                </div>
+                <div class="form-group">
+                    <label>Sıra</label>
+                    @Html.TextBox("Sira","",new {@class="form-control",@id="ESira"})
+                </div>
+                <div class="form-group">
+                    <label>Aktif</label>
+                    @Html.CheckBox("Active",true,new {@class="form-control"})
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success">Kaydet</button>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        function editFunc(row){
+            $('#EAdi').val("");
+            $('#ESira').val("");
+            $('#pid').val("");
+            var name=$(row).find('td.name').text();
+            var order=$(row).find('td.order').text();
+
+            $('#EAdi').val(name);
+            $('#ESira').val(order);
+        }
+    </script>
+}
