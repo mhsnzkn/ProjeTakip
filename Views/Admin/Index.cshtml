@@ -16,7 +16,7 @@
 </nav>
 
 <div class="d-flex justify-content-end">
-    @Html.ActionLink("Yeni Proje","AddProje","Admin",null,new {@class="btn btn-info m-1"})
+    <button type="button" class="btn btn-info m-1" data-toggle="modal" data-target=".bd-example-modal-lg">Yeni Proje</button>
 </div>
 <table class="table table-striped">
     <thead class="table-dark" style="background-color:#5676c5">
@@ -45,4 +45,40 @@
 
     
 </div>
+</div>
+
+<!-- Large modal -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">Yeni Proje</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using(Html.BeginForm("AddProje","Admin",null,FormMethod.Post,true,null)){
+                <div class="form-group">
+                    <label>Adı</label>
+                    @Html.TextBox("Adi","",new {@class="form-control"})
+                </div>
+                <div class="form-group">
+                    <label>Sıra</label>
+                    @Html.TextBox("Sira","",new {@class="form-control"})
+                </div>
+                <div class="form-group">
+                    <label>Aktif</label>
+                    @Html.CheckBox("Active",true,new {@class="form-control"})
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success">Kaydet</button>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
 </div>
