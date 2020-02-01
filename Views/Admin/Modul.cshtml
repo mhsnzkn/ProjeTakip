@@ -30,7 +30,7 @@
     <tbody class="table-light">
         @foreach (var item in Model)
         {
-            <tr class="text-center t_row" data-id="@item.Id">
+            <tr class="text-center">
                 <th class="name">@item.Adi</th>
                 <th class="order">@item.Sira</th>
                 @if(item.Active){
@@ -40,7 +40,7 @@
                 }
                  <th>@*<a asp-action="EditModul" asp-route-projeid="@item.ProjeId" asp-route-modulid="@item.Id" class="btn btn-warning m-1">Düzenle</a> *@
                 <a asp-action="Modul" asp-route-projeid="@item.Id" class="btn btn-danger m-1">Sil</a>
-                 <button type="button" data-toggle="modal" data-target=".bd-example-modal-lg-2" class="btn btn-warning m-1" onclick="editFunc(this.closest('.t_row'))">Düzenle</button>
+                 <button type="button" data-toggle="modal" data-target=".bd-example-modal-lg-2" class="btn btn-warning m-1" onclick="getModul(@item.Id)">Düzenle</button>
                 <a asp-action="RaporTuru" asp-route-projeid="@item.ProjeId" asp-route-modulid="@item.Id" class="btn btn-primary m-1">Listele</a></th>
             </tr>
         }
@@ -110,31 +110,30 @@
                 </button>
             </div>
             <div class="modal-body">
-                @using(Html.BeginForm("AddModul","Admin",null,FormMethod.Post,true,null)){
-                    <input type="hidden" id="pid" name="Id" value="">
-                <input class="form-control" type="hidden" name="ProjeId"
+                @using(Html.BeginForm("EditModul","Admin",null,FormMethod.Post,true,null)){
+                    <input type="hidden" id="mid" name="Id" value="">
+                <input class="form-control" type="hidden" name="ProjeId" id="pid"
                     value='@ViewContext.RouteData.Values["projeid"]'>
 
                 <div class="form-group">
                     <label>Adı</label>
-                    @Html.TextBox("Adi","",new {@class="form-control",@id="EAdi"})
+                    @Html.TextBox("Adi","",new {@class="form-control",@id="eadi"})
                 </div>
                 <div class="form-group">
                     <label>Sıra</label>
-                    @Html.TextBox("Sira","",new {@class="form-control",@id="ESira"})
+                    @Html.TextBox("Sira","",new {@class="form-control",@id="esira"})
                 </div>
-                <div class="form-group">3
-                    
+                <div class="form-group">
                     <label>Aktif</label>
                     @Html.CheckBox("Active",true,new {@class="form-control"})
                 </div>
                 <div class="form-group">
                     <label>Site Linki</label>
-                    @Html.TextBox("DemoLink","",new {@class="form-control"})
+                    @Html.TextBox("DemoLink","",new {@class="form-control",@id="edemolink"})
                 </div>
                 <div class="form-group">
                     <label>Fontawesome Html</label>
-                    @Html.TextBox("Fontawesome","",new {@class="form-control"})
+                    @Html.TextBox("Fontawesome","",new {@class="form-control",@id="efontawesome"})
                 </div>
 
                 <div class="d-flex justify-content-between">
@@ -148,17 +147,30 @@
 
 @section Scripts{
     <script>
-        function editFunc(row){
-            $('#EAdi').val("");
-            $('#ESira').val("");
+       function getModul(id){
+           $('#mid').val("");
             $('#pid').val("");
-            var name=$(row).find('td.name').text();
-            var order=$(row).find('td.order').text();
-            var id=$(row).data('id');
-
-            $('#EAdi').val(name);
-            $('#ESira').val(order);
-            $('#pid').val(id);
-        }
+            $('#eadi').val("");
+            $('#edemolink').val("");
+            $('#efontawesome').val("");
+           var model={id:id};
+           $.ajax({
+               url: "/Admin/GetModul",
+               type:"GET",
+               dataType:"json",
+               data:model,
+               success:function(res){
+                   $('#mid').val(res.id);
+                   $('#esira').val(res.sira);
+                   $('#pid').val(res.projeId);
+                   $('#eadi').val(res.adi);
+                   $('#edemolink').val(res.demoLink);
+                   $('#efontawesome').val(res.fontawesome);
+               },
+               error:function(res){
+                   toastr.error("Bir hata oldu");
+               }
+           })
+       }
     </script>
 }

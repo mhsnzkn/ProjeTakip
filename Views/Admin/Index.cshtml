@@ -30,7 +30,7 @@
     <tbody class="table-light">
         @foreach (var item in Model)
         {
-            <tr class="text-center t_row">
+            <tr class="text-center t_row" data-id="@item.Id">
                 <td class="name">@item.Adi</td>
                 <td class="order">@item.Sira</td>
                 @if(item.Active){
@@ -100,7 +100,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                @using(Html.BeginForm("AddProje","Admin",null,FormMethod.Post,true,null)){
+                @using(Html.BeginForm("EditProje","Admin",null,FormMethod.Post,true,null)){
                     <input type="hidden" id="pid" name="Id" value="">
                 <div class="form-group">
                     <label>Adı</label>
@@ -132,9 +132,11 @@
             $('#pid').val("");
             var name=$(row).find('td.name').text();
             var order=$(row).find('td.order').text();
+            var id=$(row).data('id');
 
             $('#EAdi').val(name);
             $('#ESira').val(order);
+            $('#pid').val(id);
         }
     </script>
 }

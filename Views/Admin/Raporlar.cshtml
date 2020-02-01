@@ -43,7 +43,7 @@
                 @* <a asp-action="EditRapor" asp-route-projeid='@item.ProjeId'
                 asp-route-modulid='@item.ModulId' asp-route-raporturuid="@item.RaporTurId" asp-route-raporid="@item.Id" class="btn btn-warning m-1">Düzenle</a> *@
               <a asp-action="Modul" asp-route-projeid="@item.Id" class="btn btn-danger m-1">Sil</a>
-               <button type="button" data-toggle="modal" data-target=".bd-example-modal-lg-2" class="btn btn-warning m-1">Düzenle</button>
+               <button type="button" data-toggle="modal" data-target=".bd-example-modal-lg-2" class="btn btn-warning m-1" onclick="getRapor(@item.Id)">Düzenle</button>
                 <a href="/files/@item.Aciklama" target="_blank" class="btn btn-danger m-1">Görüntüle</a></th>
             </tr>
         }
@@ -86,10 +86,6 @@
                     @Html.TextBox("Sira","",new {@class="form-control"})
                 </div>
                 <div class="form-group">
-                    <label>Dosya Adı</label>
-                    @Html.TextBox("Aciklama","",new {@class="form-control",disabled=true})
-                </div>
-                <div class="form-group">
                     <label>Aktif</label>
                     @Html.CheckBox("Active",true,new {@class="form-control"})
                 </div>
@@ -112,7 +108,7 @@
     </div>
 </div>
 
-<div class="modal fade bd-example-modal-lg-2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel2"
+<div class="modal fade bd-example-modal-lg-2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel-2"
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -124,35 +120,33 @@
                 </button>
             </div>
             <div class="modal-body">
-                @using(Html.BeginForm("AddRapor","Admin",null,FormMethod.Post,true,new {@enctype="multipart/form-data"})){
+                @using(Html.BeginForm("EditRapor","Admin",null,FormMethod.Post,true,new {@enctype="multipart/form-data"})){
 
-                <input class="form-control" type="hidden" name="ProjeId"
-                    value='@ViewContext.RouteData.Values["projeid"]'>
-                <input class="form-control" type="hidden" name="ModulId"
-                    value='@ViewContext.RouteData.Values["modulid"]'>
-                <input class="form-control" type="hidden" name="RaporTurId"
-                    value='@ViewContext.RouteData.Values["raporturuid"]'>
+                <input class="form-control" type="hidden" name="ProjeId" id="projeid">
+                <input class="form-control" type="hidden" name="ModulId" id="modulid">
+                <input class="form-control" type="hidden" name="RaporTurId" id="raporturid">
+                <input class="form-control" type="hidden" name="Id" id="rid">
 
                 <div class="form-group">
                     
                     <label>Adı</label>
-                    @Html.TextBox("Adi","",new {@class="form-control"})
+                    @Html.TextBox("Adi","",new {@class="form-control",@id="eadi"})
                 </div>
                 <div class="form-group">
                     <label>Sıra</label>
-                    @Html.TextBox("Sira","",new {@class="form-control"})
+                    @Html.TextBox("Sira","",new {@class="form-control",@id="esira"})
                 </div>
                 <div class="form-group">
                     <label>Dosya Adı</label>
-                    @Html.TextBox("Aciklama","",new {@class="form-control",disabled=true})
+                    @Html.TextBox("Aciklama","",new {@class="form-control",@readonly=true,@id="edosyaadi"})
                 </div>
                 <div class="form-group">
                     <label>Aktif</label>
-                    @Html.CheckBox("Active",true,new {@class="form-control"})
+                    @Html.CheckBox("Active",true,new {@class="form-control",@id="EActive"})
                 </div>
                 <div class="form-group">
                     <label>Tarih</label>
-                    @Html.TextBox("Tarih","",new {@class="form-control",@type="date"})
+                    @Html.TextBox("Tarih","",new {@class="form-control",@type="date",@id="etarih"})
                 </div>
                 <div class="form-group">
                     <label>Dosya</label>
@@ -168,3 +162,40 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script>
+       function getRapor(id){
+           $('#rid').val("");
+            $('#projeid').val("");
+            $('#modulid').val("");
+            $('#raporturid').val("");
+            $('#eadi').val("");
+            $('#esira').val("");
+            $('#edosyaadi').val("");
+            $('#etarih').val("");
+           var model={id:id};
+           $.ajax({
+               url: "/Admin/GetRapor",
+               type:"GET",
+               dataType:"json",
+               data:model,
+               success:function(res){
+                   $('#rid').val(res.id);
+                   $('#projeid').val(res.projeId);
+                   $('#modulid').val(res.modulId);
+                   $('#raporturid').val(res.raporTurId);
+                   $('#eadi').val(res.adi);
+                   $('#esira').val(res.sira);
+                   $('#edosyaadi').val(res.aciklama);
+                   var date=new Date(res.tarih).toLocaleDateString('fr-CA');
+                   console.log(date)
+                   $('#etarih').val(date);
+               },
+               error:function(res){
+                   toastr.error("Bir hata oldu");
+               }
+           })
+       }
+    </script>
+}

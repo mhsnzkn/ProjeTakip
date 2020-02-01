@@ -30,7 +30,7 @@ namespace ProjeYonetim.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            var model = await db.Projeler.ToListAsync();
+            var model = await db.Projeler.OrderBy(a => a.Sira).ToListAsync();
 
             return View(model);
         }
@@ -294,6 +294,28 @@ namespace ProjeYonetim.Controllers
             return RedirectToAction("Raporlar", "Admin", new { projeid = rapor.ProjeId, modulid = rapor.ModulId, raporturuid = rapor.RaporTurId });
         }
 
+        public async Task<IActionResult> GetModul(int id)
+        {
+            if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var modul = await db.Moduller.FindAsync(id);
+
+            return Ok(modul);
+        }
+        public async Task<IActionResult> GetRapor(int id)
+        {
+            if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var rapor = await db.Raporlar.FindAsync(id);
+
+            return Ok(rapor);
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

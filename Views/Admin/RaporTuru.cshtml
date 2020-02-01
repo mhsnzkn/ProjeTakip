@@ -30,7 +30,7 @@
     <tbody class="table-light">
         @foreach (var item in Model)
         {
-            <tr class="text-center">
+            <tr class="text-center t_row">
                 <th>@item.Adi</th>
                 <th>@item.Sira</th>
                 @if(item.Active){
@@ -38,10 +38,9 @@
                 } else{
                 <th><i class="fas fa-times-circle fa-lg" style="color:red"></i></th>
                 }<th>
-                @* <a asp-action="EditRaporTuru" asp-route-projeid='@item.ProjeId' asp-route-modulid='@item.ModulId'
-                asp-route-raporturuid="@item.Id" class="btn btn-warning m-1">Düzenle</a> *@
+                
                 <a asp-action="Modul" asp-route-projeid="@item.Id" class="btn btn-danger m-1">Sil</a>
-                 <button type="button" data-toggle="modal" data-target=".bd-example-modal-lg-2" class="btn btn-warning m-1">Düzenle</button>
+                 <button type="button" data-toggle="modal" data-target=".bd-example-modal-lg-2" class="btn btn-warning m-1" onclick='getRaporTuru(@item.Id,"@item.Adi",@item.Sira)'>Düzenle</button>
                 <a asp-action="Raporlar" asp-route-projeid='@item.ProjeId' asp-route-modulid='@item.ModulId'
                 asp-route-raporturuid="@item.Id" class="btn btn-primary m-1">Listele</a></th>
             </tr>
@@ -60,7 +59,7 @@
         <div class="modal-content">
 
             <div class="modal-header">
-                <h4 class="modal-title" id="myLargeModalLabel">Yeni Proje</h4>
+                <h4 class="modal-title" id="myLargeModalLabel">Yeni Rapor Türü</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -72,6 +71,7 @@
                     value='@ViewContext.RouteData.Values["projeid"]'>
                 <input class="form-control" type="hidden" name="ModulId"
                     value='@ViewContext.RouteData.Values["modulid"]'>
+                
 
                 <div class="form-group">
                     <label>Adı</label>
@@ -102,26 +102,27 @@
         <div class="modal-content">
 
             <div class="modal-header">
-                <h4 class="modal-title" id="myLargeModalLabel">Rapor Türü Düzenle</h4>
+                <h4 class="modal-title" id="myLargeModalLabel2">Rapor Türü Düzenle</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body">
-                @using(Html.BeginForm("AddRaporTuru","Admin",null,FormMethod.Post,true,null)){
+                @using(Html.BeginForm("EditRaporTuru","Admin",null,FormMethod.Post,true,null)){
 
                 <input class="form-control" type="hidden" name="ProjeId"
                     value='@ViewContext.RouteData.Values["projeid"]'>
                 <input class="form-control" type="hidden" name="ModulId"
                     value='@ViewContext.RouteData.Values["modulid"]'>
-
+                <input class="form-control" type="hidden" name="Id" id="eid">
+                    
                 <div class="form-group">
                     <label>Adı</label>
-                    @Html.TextBox("Adi","",new {@class="form-control"})
+                    @Html.TextBox("Adi","",new {@class="form-control",@id="eadi"})
                 </div>
                 <div class="form-group">
                     <label>Sıra</label>
-                    @Html.TextBox("Sira","",new {@class="form-control"})
+                    @Html.TextBox("Sira","",new {@class="form-control",@id="esira"})
                 </div>
                 <div class="form-group">
                     <label>Aktif</label>
@@ -137,3 +138,11 @@
         </div>
     </div>
 </div>
+
+<script>
+    function getRaporTuru(id,adi,sira){
+        $('#eid').val(id);
+        $('#eadi').val(adi);
+        $('#esira').val(sira);
+    }
+</script>
