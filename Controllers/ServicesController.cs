@@ -28,5 +28,94 @@ namespace ProjeYonetim.Controllers
 
             return Ok(model);
         }
+        [HttpGet("RemoveProje")]
+        public async Task<IActionResult> RemoveProje(int id)
+        {
+            if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            var result = 0;
+            try
+            {
+                var proje = new Proje()
+                {
+                    Id = id
+                };
+                db.Attach(proje);
+                db.Remove(proje);
+                await db.SaveChangesAsync();
+                result = 1;
+            }
+            catch
+            {
+                result = 2;
+            }
+
+            return Ok(result);
+        }
+   [HttpGet("RemoveModul")]
+        public async Task<IActionResult> RemoveModul(int id)
+        {
+            if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            var result=0;
+           try{
+            var model = await db.Moduller.FindAsync(id);
+            db.Remove(model);
+            await db.SaveChangesAsync();
+            result=1;
+            }
+            catch{
+            result=2;
+            }
+            // return RedirectToAction("Modul", "Admin", new { projeid = projeid });
+            return Ok(result);
+        }
+
+
+        [HttpGet("RemoveRaporTur")]
+
+        public async Task<IActionResult> RemoveRaporTur(int id)
+        {
+            if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            var result=0;
+            try{
+            var model = await db.RaporTurleri.FindAsync(id);
+            db.Remove(model);
+            await db.SaveChangesAsync();
+            result=1;
+            }
+            catch{
+                result=2;
+            }
+
+             return Ok(result);
+        }
+        [HttpGet("RemoveRapor")]
+        public async Task<IActionResult> RemoveRapor(int id)
+        {
+            if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            var result=0;
+            try{
+            var model = await db.Raporlar.FindAsync(id);
+            db.Remove(model);
+            await db.SaveChangesAsync();
+            result=1;
+            }
+            catch{
+                result=2;
+            }
+            
+              return Ok(result);
+        }
     }
 }

@@ -39,7 +39,8 @@
                 <th><i class="fas fa-times-circle fa-lg" style="color:red"></i></th>
                 }<th>
                 
-                <a asp-action="RemoveRaporTur" asp-route-id="@item.Id" class="btn btn-danger m-1">Sil</a>
+                 <button type="button" data-id="@item.Id" onclick="deleteProject(@item.Id)" class="btn btn-danger m-1">Sil</button>
+
                  <button type="button" data-toggle="modal" data-target=".bd-example-modal-lg-2" class="btn btn-warning m-1" onclick='getRaporTuru(@item.Id,"@item.Adi",@item.Sira)'>Düzenle</button>
                 <a asp-action="Raporlar" asp-route-projeid='@item.ProjeId' asp-route-modulid='@item.ModulId'
                 asp-route-raporturuid="@item.Id" class="btn btn-primary m-1">Listele</a></th>
@@ -145,4 +146,25 @@
         $('#eadi').val(adi);
         $('#esira').val(sira);
     }
+             function deleteProject(id){
+            var model={id:id};
+            $.ajax({
+               url: "/Services/RemoveRaporTur",
+               type:"GET",
+               dataType:"json",
+               data:model,
+               success:function(res){
+                   if(res==1){
+                        toastr.success('Silme Başarılı');
+                        location.reload();
+                   }else if(res==2){
+                       toastr.error('Alt bağlı raporlar silinmeden silme işlemi yapılamaz');
+                   }
+                   
+               },
+               error:function(res){
+                   toastr.error("Bir hata oldu");
+               }
+           })
+        }
 </script>
