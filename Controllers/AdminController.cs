@@ -323,16 +323,24 @@ namespace ProjeYonetim.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-
-            var proje = new Proje()
+            var result = 0;
+            try
             {
-                Id = id
-            };
-            db.Attach(proje);
-            db.Remove(proje);
-            await db.SaveChangesAsync();
+                var proje = new Proje()
+                {
+                    Id = id
+                };
+                db.Attach(proje);
+                db.Remove(proje);
+                await db.SaveChangesAsync();
+                result = 1;
+            }
+            catch
+            {
+                result = 2;
+            }
 
-            return RedirectToAction("Index", "Admin");
+            return Ok(result);
         }
 
         public async Task<IActionResult> RemoveModul(int id)
