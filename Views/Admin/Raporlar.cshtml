@@ -40,9 +40,7 @@
                 } else{
                 <th><i class="fas fa-times-circle fa-lg" style="color:red"></i></th>
                 }<th>
-                @* <a asp-action="EditRapor" asp-route-projeid='@item.ProjeId'
-                asp-route-modulid='@item.ModulId' asp-route-raporturuid="@item.RaporTurId" asp-route-raporid="@item.Id" class="btn btn-warning m-1">Düzenle</a> *@
-              <a asp-action="Modul" asp-route-projeid="@item.Id" class="btn btn-danger m-1">Sil</a>
+              <a asp-action="RemoveRapor" asp-route-id="@item.Id" class="btn btn-danger m-1">Sil</a>
                <button type="button" data-toggle="modal" data-target=".bd-example-modal-lg-2" class="btn btn-warning m-1" onclick="getRapor(@item.Id)">Düzenle</button>
                 <a href="/files/@item.Aciklama" target="_blank" class="btn btn-danger m-1">Görüntüle</a></th>
             </tr>

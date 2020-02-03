@@ -39,7 +39,7 @@
                 <td><i class="fas fa-times-circle fa-lg" style="color:red"></i></td>
                 }<td>
                 @* <a asp-action="EditProje" asp-route-projeid="@item.Id" class="btn btn-warning m-1">Düzenle</a> *@
-                <a asp-action="Modul" asp-route-projeid="@item.Id" class="btn btn-danger m-1">Sil</a>
+                <a asp-action="RemoveProje" asp-route-id="@item.Id" class="btn btn-danger m-1">Sil</a>
                  <button type="button" data-toggle="modal" data-target=".bd-example-modal-lg-2" class="btn btn-warning m-1" onclick="editFunc(this.closest('.t_row'))">Düzenle</button>
                 <a asp-action="Modul" asp-route-projeid="@item.Id" class="btn btn-primary m-1">Listele</a></td>
             </tr>

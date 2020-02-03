@@ -31,17 +31,17 @@
         @foreach (var item in Model)
         {
             <tr class="text-center">
-                <th class="name">@item.Adi</th>
-                <th class="order">@item.Sira</th>
+                <td class="name">@item.Adi</td>
+                <td class="order">@item.Sira</td>
                 @if(item.Active){
-                    <th><i class="fas fa-check-circle fa-lg" style="color:green"></i></th>
+                    <td><i class="fas fa-check-circle fa-lg" style="color:green"></i></td>
                 } else{
-                <th><i class="fas fa-times-circle fa-lg" style="color:red"></i></th>
+                <td><i class="fas fa-times-circle fa-lg" style="color:red"></i></td>
                 }
-                 <th>@*<a asp-action="EditModul" asp-route-projeid="@item.ProjeId" asp-route-modulid="@item.Id" class="btn btn-warning m-1">Düzenle</a> *@
-                <a asp-action="Modul" asp-route-projeid="@item.Id" class="btn btn-danger m-1">Sil</a>
+                <td>
+                <a asp-action="RemoveModul" asp-route-id="@item.Id" class="btn btn-danger m-1">Sil</a>
                  <button type="button" data-toggle="modal" data-target=".bd-example-modal-lg-2" class="btn btn-warning m-1" onclick="getModul(@item.Id)">Düzenle</button>
-                <a asp-action="RaporTuru" asp-route-projeid="@item.ProjeId" asp-route-modulid="@item.Id" class="btn btn-primary m-1">Listele</a></th>
+                <a asp-action="RaporTuru" asp-route-projeid="@item.ProjeId" asp-route-modulid="@item.Id" class="btn btn-primary m-1">Listele</a></td>
             </tr>
         }
     </tbody>

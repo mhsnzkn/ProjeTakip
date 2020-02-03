@@ -317,6 +317,69 @@ namespace ProjeYonetim.Controllers
             return Ok(rapor);
         }
 
+        public async Task<IActionResult> RemoveProje(int id)
+        {
+            if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var proje = new Proje()
+            {
+                Id = id
+            };
+            db.Attach(proje);
+            db.Remove(proje);
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Index", "Admin");
+        }
+
+        public async Task<IActionResult> RemoveModul(int id)
+        {
+            if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var model = await db.Moduller.FindAsync(id);
+            var projeid = model.ProjeId;
+            db.Remove(model);
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Modul", "Admin", new { projeid = projeid });
+        }
+
+        public async Task<IActionResult> RemoveRaporTur(int id)
+        {
+            if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var model = await db.RaporTurleri.FindAsync(id);
+            var raportur = model;
+            db.Remove(model);
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("RaporTuru", "Admin", new { projeid = raportur.ProjeId, modulid = raportur.ModulId });
+        }
+
+        public async Task<IActionResult> RemoveRapor(int id)
+        {
+            if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var model = await db.Raporlar.FindAsync(id);
+            var rapor = model;
+            db.Remove(model);
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Raporlar", "Admin", new { projeid = model.ProjeId, modulid = rapor.ModulId, raporturuid = rapor.Id });
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
