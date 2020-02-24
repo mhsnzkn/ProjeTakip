@@ -52,9 +52,17 @@ namespace ProjeYonetim.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            proje.UptDate = DateTime.Now;
+            var dbmodel = await db.Projeler.FindAsync(proje.Id);
+            if (dbmodel == null)
+                return NotFound();
 
-            db.Projeler.Update(proje);
+            dbmodel.Adi = proje.Adi;
+            dbmodel.Sira = proje.Sira;
+            dbmodel.Active = proje.Active;
+
+            dbmodel.UptDate = DateTime.Now;
+
+            db.Projeler.Update(dbmodel);
             await db.SaveChangesAsync();
 
             return RedirectToAction("Index");
@@ -135,12 +143,21 @@ namespace ProjeYonetim.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            modul.UptDate = DateTime.Now;
+            var dbmodel = await db.Moduller.FindAsync(modul.Id);
+            if (dbmodel == null)
+                return NotFound();
 
-            db.Update(modul);
+            dbmodel.Adi = modul.Adi;
+            dbmodel.Sira = modul.Sira;
+            dbmodel.Active = modul.Active;
+            dbmodel.DemoLink = modul.DemoLink;
+            dbmodel.Fontawesome = modul.Fontawesome;
+            dbmodel.UptDate = DateTime.Now;
+
+            db.Update(dbmodel);
             await db.SaveChangesAsync();
 
-            return RedirectToAction("Modul", "Admin", new { projeid = modul.ProjeId });
+            return RedirectToAction("Modul", "Admin", new { projeid = dbmodel.ProjeId });
         }
 
         public async Task<IActionResult> RaporTuru(int modulid)
@@ -193,11 +210,18 @@ namespace ProjeYonetim.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            raportur.UptDate = DateTime.Now;
-            db.Update(raportur);
+            var dbmodel = await db.RaporTurleri.FindAsync(raportur.Id);
+            if (dbmodel == null)
+                return NotFound();
+
+            dbmodel.Adi = raportur.Adi;
+            dbmodel.Sira = raportur.Sira;
+            dbmodel.Active = raportur.Active;
+            dbmodel.UptDate = DateTime.Now;
+            db.Update(dbmodel);
             await db.SaveChangesAsync();
 
-            return RedirectToAction("RaporTuru", "Admin", new { projeid = raportur.ProjeId, modulid = raportur.ModulId });
+            return RedirectToAction("RaporTuru", "Admin", new { projeid = dbmodel.ProjeId, modulid = dbmodel.ModulId });
         }
 
         public async Task<IActionResult> Raporlar(int raporturuid)
@@ -270,6 +294,8 @@ namespace ProjeYonetim.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+            var dbmodel = await db.Raporlar.FindAsync(rapor.Id);
+
             if (file != null)
             {
                 try
@@ -280,18 +306,22 @@ namespace ProjeYonetim.Controllers
                     {
                         await file.CopyToAsync(fs);
                     }
-                    rapor.Aciklama = filename;
+                    dbmodel.Aciklama = filename;
                 }
                 catch
                 {
-                    rapor.Aciklama = null;
+                    dbmodel.Aciklama = null;
                 }
             }
-            rapor.UptDate = DateTime.Now;
-            db.Update(rapor);
+            dbmodel.Adi = rapor.Adi;
+            dbmodel.Sira = rapor.Sira;
+            dbmodel.Active = rapor.Active;
+            dbmodel.Tarih = rapor.Tarih;
+            dbmodel.UptDate = DateTime.Now;
+            db.Update(dbmodel);
             await db.SaveChangesAsync();
 
-            return RedirectToAction("Raporlar", "Admin", new { projeid = rapor.ProjeId, modulid = rapor.ModulId, raporturuid = rapor.RaporTurId });
+            return RedirectToAction("Raporlar", "Admin", new { projeid = dbmodel.ProjeId, modulid = dbmodel.ModulId, raporturuid = dbmodel.RaporTurId });
         }
 
         public async Task<IActionResult> GetModul(int id)
